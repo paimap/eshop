@@ -30,9 +30,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product edit(Product product) {
+    public void edit(Product product) {
         productRepository.edit(product);
-        return product;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product delete(Product product) {
-        return productRepository.delete(product);
+    public void delete(Product product) {
+        productRepository.delete(product);
     }
 }
