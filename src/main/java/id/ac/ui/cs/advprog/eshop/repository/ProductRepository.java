@@ -23,29 +23,39 @@ public class ProductRepository {
         return productData.iterator();
     }
 
-    public Product edit(Product product){
-        for(Product p : productData){
-            if (p.getProductId() == product.getProductId()){
-                p.setProductName(product.getProductName());
-                p.setProductQuantity(product.getProductQuantity());
-                return product;
+    public void edit(Product product){
+        try {
+            for(Product p : productData){
+                if (p.getProductId() == product.getProductId()){
+                    p.setProductName(product.getProductName());
+                    p.setProductQuantity(product.getProductQuantity());
+                }
             }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     public Product findById(int id){
-        for(Product p : productData){
-            if (p.getProductId() == id){
-                return p;
+        Product product = null;
+        try {
+            for (Product p : productData) {
+                if (p.getProductId() == id) {
+                    product = p;
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return null;
+        return product;
     }
 
-    public Product delete(Product product){
-        productData.removeIf(p -> p.getProductId() == product.getProductId());
-        return null;
+    public void delete(Product product){
+        try {
+            productData.removeIf(p -> p.getProductId() == product.getProductId());
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
 }
