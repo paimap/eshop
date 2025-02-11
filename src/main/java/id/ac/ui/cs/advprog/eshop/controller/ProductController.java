@@ -20,12 +20,26 @@ public class ProductController {
     public String create(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
-        return "createProduct";
+        return "CreateProduct";
     }
 
     @PostMapping("/create")
     public String createProductPost(@ModelAttribute Product product, Model model) {
         service.create(product);
+        return "redirect:list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int id,Model model) {
+        Product product = service.findById(id);
+        model.addAttribute("product", product);
+        return "EditProduct";
+    }
+
+    @PostMapping("/edit")
+    public String editProductPost(@ModelAttribute Product product, Model model) {
+        System.out.println(product.getProductId());
+        service.edit(product);
         return "redirect:list";
     }
 
@@ -35,4 +49,6 @@ public class ProductController {
         model.addAttribute("products", allProducts);
         return "productList";
     }
+
+
 }
