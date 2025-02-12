@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ProductTest {
-    private Product product;
 
+    Product product;
     @BeforeEach
     void setUp() {
         this.product = new Product();
