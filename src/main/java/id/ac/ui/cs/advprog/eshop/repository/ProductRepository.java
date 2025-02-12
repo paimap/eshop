@@ -2,6 +2,7 @@ package id.ac.ui.cs.advprog.eshop.repository;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import org.springframework.stereotype.Repository;
+import java.util.UUID;
 
 import java.util.List;
 import java.util.Iterator;
@@ -9,14 +10,11 @@ import java.util.ArrayList;
 
 @Repository
 public class ProductRepository {
-    private int idCounter = 0;
     private List<Product> productData = new ArrayList<>();
 
-    public Product create(Product product){
+    public void create(Product product){
         productData.add(product);
-        product.setProductId(idCounter);
-        idCounter++;
-        return product;
+        product.setProductId(UUID.randomUUID().toString());
     }
 
     public Iterator<Product> findAll(){
@@ -26,7 +24,7 @@ public class ProductRepository {
     public void edit(Product product){
         try {
             for(Product p : productData){
-                if (p.getProductId() == product.getProductId()){
+                if (p.getProductId().equals(product.getProductId())){
                     p.setProductName(product.getProductName());
                     p.setProductQuantity(product.getProductQuantity());
                 }
@@ -36,11 +34,11 @@ public class ProductRepository {
         }
     }
 
-    public Product findById(int id){
+    public Product findById(String id){
         Product product = null;
         try {
             for (Product p : productData) {
-                if (p.getProductId() == id) {
+                if (p.getProductId().equals(id)) {
                     product = p;
                 }
             }
