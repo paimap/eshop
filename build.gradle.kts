@@ -34,13 +34,17 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
+
     compileOnly("org.projectlombok:lombok")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumJavaVersion")
     testImplementation("io.github.bonigarcia:selenium-jupiter:$seleniumJupiterVersion")
     testImplementation("io.github.bonigarcia:webdrivermanager:$webdrivermanagerVersion")
@@ -85,7 +89,7 @@ sonar {
         property("sonar.projectKey", "paimap")
         property ("sonar.organization", "paimap")
         property ("sonar.host.url", "https://sonarcloud.io")
-        property ("sonar.login", "5a6842659b9f2dd977034d7779c77c330715c046")
+        property ("sonar.token", "5a6842659b9f2dd977034d7779c77c330715c046")
     }
 }
 
