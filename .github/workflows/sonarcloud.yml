@@ -35,6 +35,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./gradlew clean build sonar \
-            -Dsonar.projectKey=5a6842659b9f2dd977034d7779c77c330715c046 \
+            -Dsonar.projectKey=paimap \
             -Dsonar.organization=paimap \
             -Dsonar.host.url=https://sonarcloud.io

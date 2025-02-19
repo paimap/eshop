@@ -9,6 +9,7 @@ plugins {
     jacoco
     id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
+    id("org.sonarqube") version "4.3.1.3277"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -79,5 +80,14 @@ tasks.jacocoTestReport{
     dependsOn(tasks.test)
 }
 
+sonar {
+    properties {
+        property("sonar.projectKey", "paimap")
+        property ("sonar.organization", "paimap")
+        property ("sonar.host.url", "https://sonarcloud.io")
+        property ("sonar.login", "5a6842659b9f2dd977034d7779c77c330715c046")
+    }
+}
 
 
+//5a6842659b9f2dd977034d7779c77c330715c046
