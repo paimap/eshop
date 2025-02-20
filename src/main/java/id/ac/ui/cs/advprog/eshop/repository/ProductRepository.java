@@ -22,38 +22,27 @@ public class ProductRepository {
     }
 
     public void edit(Product product){
-        try {
-            for(Product p : productData){
-                if (p.getProductId().equals(product.getProductId())){
-                    p.setProductName(product.getProductName());
-                    p.setProductQuantity(product.getProductQuantity());
-                }
+        for(Product p : productData){
+            if (p.getProductId().equals(product.getProductId())){
+                p.setProductName(product.getProductName());
+                p.setProductQuantity(product.getProductQuantity());
             }
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
         }
+
     }
 
     public Product findById(String id){
         Product product = null;
-        try {
             for (Product p : productData) {
                 if (p.getProductId().equals(id)) {
                     product = p;
                 }
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         return product;
     }
 
     public void delete(Product product){
-        try {
-            productData.removeIf(p -> p.getProductId() == product.getProductId());
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+        productData.removeIf(p -> p.getProductId().equals(product.getProductId()));
     }
 
 }

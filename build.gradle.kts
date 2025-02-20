@@ -9,6 +9,7 @@ plugins {
     jacoco
     id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
+    id("org.sonarqube") version "4.3.1.3277"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -33,13 +34,17 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
+
     compileOnly("org.projectlombok:lombok")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumJavaVersion")
     testImplementation("io.github.bonigarcia:selenium-jupiter:$seleniumJupiterVersion")
     testImplementation("io.github.bonigarcia:webdrivermanager:$webdrivermanagerVersion")
@@ -79,5 +84,16 @@ tasks.jacocoTestReport{
     dependsOn(tasks.test)
 }
 
+sonar {
+    properties {
+        property("sonar.projectKey", "paimap")
+        property ("sonar.organization", "paimap")
+        property ("sonar.host.url", "https://sonarcloud.io")
+        property ("sonar.token", "5a6842659b9f2dd977034d7779c77c330715c046")
+    }
+}
 
 
+//5a6842659b9f2dd977034d7779c77c330715c046
+
+//q0z1seqr9hdxx1zz2m5erd35ytle2to1wm5ky0qn0a90l5kamhp3cpt80jtra83g
