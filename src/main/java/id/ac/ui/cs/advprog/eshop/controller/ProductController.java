@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/product")
-public class ProductController {
+public class ProductController implements ControllerInterface {
 
     @Autowired
     private ProductService service;
@@ -26,7 +26,7 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public String createProductPost(@ModelAttribute Product product, Model model) {
+    public String createPost(@ModelAttribute Product product, Model model) {
         service.create(product);
         return "redirect:list";
     }
@@ -39,21 +39,21 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public String editProductPost(@ModelAttribute Product product, Model model) {
+    public String editPost(@ModelAttribute Product product, Model model) {
         System.out.println(product.getProductId());
         service.edit(product);
         return "redirect:list";
     }
 
     @GetMapping("/list")
-    public String productListPage(Model model) {
+    public String ListPage(Model model) {
         List<Product> allProducts = service.findAll();
         model.addAttribute("products", allProducts);
         return "ProductList";
     }
 
-    @PostMapping("/delete/{id}")
-    public String delete(@PathVariable("id") String id) {
+    @PostMapping("/delete")
+    public String delete(@RequestParam("id") String id){
         Product product = service.findById(id);
         service.delete(product);
         return "redirect:/product/list";
@@ -62,47 +62,47 @@ public class ProductController {
 
 @Controller
 @RequestMapping("/car")
-class CarController extends ProductController {
+class CarController implements ControllerInterface {
     @Autowired
     private CarService carservice; //implement DIP
 
     @GetMapping("/createCar")
-    public String createCarPage(Model model) {
+    public String create(Model model) {
         Car car = new Car();
         model.addAttribute("car", car);
         return "CreateCar";
     }
 
     @PostMapping("/createCar")
-    public String createCarPost(@ModelAttribute Car car, Model model) {
+    public String createPost(@ModelAttribute Car car, Model model) {
         carservice.create(car);
         return "redirect:listCar";
     }
 
     @GetMapping("/listCar")
-    public String carListPage(Model model) {
+    public String ListPage(Model model) {
         List<Car> allCars = carservice.findAll();
         model.addAttribute("cars", allCars);
         return "CarList";
     }
 
     @GetMapping("/editCar/{carId}")
-    public String editCar(@PathVariable("carId") String carId, Model model) {
-        Car car = carservice.findById(carId);
+    public String edit(@PathVariable("carId") String id, Model model) {
+        Car car = carservice.findById(id);
         model.addAttribute("car", car);
         return "EditCar";
     }
 
     @PostMapping("/editCar")
-    public String editCarPost(@ModelAttribute Car car, Model model) {
+    public String editPost(@ModelAttribute Car car, Model model) {
         System.out.println(car.getCarId());
         carservice.update(car.getCarId(),car);
         return "redirect:listCar";
     }
 
     @PostMapping("/deleteCar")
-    public String deleteCar(@RequestParam("carId") String carId){
-        carservice.deleteCarById(carId);
+    public String delete(@RequestParam("id") String id){
+        carservice.deleteCarById(id);
         return "redirect:listCar";
     }
 }
