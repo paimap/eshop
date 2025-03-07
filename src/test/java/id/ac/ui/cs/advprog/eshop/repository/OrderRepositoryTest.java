@@ -1,6 +1,9 @@
+package id.ac.ui.cs.advprog.eshop.repository;
+
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Product;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,10 +13,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderRepositoryTest {
-
-    OrderRepository orderRepository;
     List<Order> orders;
-
+    OrderRepository orderRepository;
     @BeforeEach
     void setUp() {
         orderRepository = new OrderRepository();
@@ -56,7 +57,7 @@ class OrderRepositoryTest {
         Order order = orders.get(1);
         Order result = orderRepository.save(order);
 
-        Order findResult = orderRepository.findById(orders.get(1).getId());
+        Order findResult = (Order) orderRepository.findById(orders.get(1).getId());
 
         assertEquals(order.getId(), result.getId());
         assertEquals(order.getId(), findResult.getId());
@@ -105,6 +106,7 @@ class OrderRepositoryTest {
     @Test
     void testFindByIdIfIdNotFound() {
         for (Order order : orders) {
+
             orderRepository.save(order);
         }
 
@@ -135,6 +137,4 @@ class OrderRepositoryTest {
 
         assertTrue(orderList.isEmpty());
     }
-
-
 }
